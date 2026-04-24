@@ -11,7 +11,7 @@
 
 ## 🚀 Quick Start
 ```bash
-git clone https://github.com/yourusername/GIB.git
+git clone https://github.com/zainthehacker-K/GIB.git
 cd GIB
 chmod +x installer.sh
 ./installer.sh
@@ -19,7 +19,7 @@ python3 GlobalInstaKiller.py -t target_user -c IN -i 8
 
 ## ☁️ VPS One-Click Deploy
 ```bash
-wget https://github.com/YOURUSERNAME/GIB/raw/main/cloud-deploy.sh
+wget https://github.com/zainthehacker-K/GIB/raw/main/cloud-deploy.sh
 chmod +x cloud-deploy.sh
 nano cloud-deploy.sh  # Edit TARGET_USER
 ./cloud-deploy.sh
