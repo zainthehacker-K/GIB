@@ -2,3 +2,84 @@ Traceback (most recent call last):
   File "/home/zainthehacker/Desktop/GIB/GlobalInstaKiller.py", line 12, in <module>
     from fake_useragent import UserAgent
 ModuleNotFoundError: No module named 'fake_useragent'
+2026-04-24 14:28:52,910 | INFO | 
+🛑 Kill switch activated - Cleaning up...
+2026-04-24 14:28:54,400 | INFO | 
+🛑 Kill switch activated - Cleaning up...
+2026-04-24 15:28:17,750 | INFO | 🎯 Target: @rohan__jabeel_ | Country: GLOBAL | Intensity: 3/10 | Tor: True
+2026-04-24 15:28:17,808 | INFO | 🚀 Launching 15 attacks with 5 threads
+2026-04-24 15:29:46,998 | INFO | patching driver executable /home/zainthehacker/.local/share/undetected_chromedriver/undetected_chromedriver
+2026-04-24 15:29:48,315 | INFO | patching driver executable /home/zainthehacker/.local/share/undetected_chromedriver/undetected_chromedriver
+2026-04-24 15:30:31,419 | ERROR | ❌ FAIL: Message: Can not connect to the Service /home/zainthehacker/.local/share/undetected_chromedriver/undetected_chromedriver
+
+2026-04-24 15:30:32,141 | ERROR | ❌ FAIL: Message: Can not connect to the Service /home/zainthehacker/.local/share/undetected_chromedriver/undetected_chromedriver
+
+2026-04-24 15:30:48,973 | ERROR | ❌ FAIL: <urlopen error [Errno -3] Temporary failure in name resolution>
+2026-04-24 15:30:48,973 | ERROR | ❌ FAIL: <urlopen error [Errno -3] Temporary failure in name resolution>
+2026-04-24 15:31:01,041 | ERROR | ❌ FAIL: <urlopen error [Errno -3] Temporary failure in name resolution>
+2026-04-24 15:31:01,517 | ERROR | ❌ FAIL: <urlopen error [Errno -3] Temporary failure in name resolution>
+2026-04-24 15:31:37,770 | ERROR | Tor renew failed: Socket error: 0x01: General SOCKS server failure
+2026-04-24 15:31:37,778 | ERROR | Tor renew failed: Socket error: 0x01: General SOCKS server failure
+2026-04-24 15:31:47,925 | ERROR | ❌ FAIL: <urlopen error [Errno -3] Temporary failure in name resolution>
+2026-04-24 15:31:47,926 | ERROR | ❌ FAIL: <urlopen error [Errno -3] Temporary failure in name resolution>
+2026-04-24 15:31:51,515 | ERROR | Tor renew failed: Socket error: 0x01: General SOCKS server failure
+2026-04-24 15:31:51,606 | ERROR | Tor renew failed: Socket error: 0x01: General SOCKS server failure
+2026-04-24 15:32:01,545 | ERROR | ❌ FAIL: <urlopen error [Errno -3] Temporary failure in name resolution>
+2026-04-24 15:32:01,633 | ERROR | ❌ FAIL: <urlopen error [Errno -3] Temporary failure in name resolution>
+2026-04-24 15:32:03,833 | ERROR | Tor renew failed: Socket error: 0x01: General SOCKS server failure
+2026-04-24 15:32:04,682 | ERROR | Tor renew failed: Socket error: 0x01: General SOCKS server failure
+2026-04-24 15:32:13,857 | ERROR | ❌ FAIL: <urlopen error [Errno -3] Temporary failure in name resolution>
+2026-04-24 15:32:14,721 | ERROR | ❌ FAIL: <urlopen error [Errno -3] Temporary failure in name resolution>
+2026-04-24 15:36:14,332 | ERROR | ❌ FAIL: [Errno 2] No such file or directory: '/home/zainthehacker/.local/share/undetected_chromedriver/undetected/chromedriver-linux64/chromedriver' -> '/home/zainthehacker/.local/share/undetected_chromedriver/undetected_chromedriver'
+2026-04-24 15:36:14,586 | INFO | patching driver executable /home/zainthehacker/.local/share/undetected_chromedriver/undetected_chromedriver
+2026-04-24 15:36:14,739 | ERROR | ❌ FAIL: [Errno 2] No such file or directory: '/home/zainthehacker/.local/share/undetected_chromedriver/undetected/chromedriver-linux64/chromedriver' -> '/home/zainthehacker/.local/share/undetected_chromedriver/undetected_chromedriver'
+2026-04-24 15:36:56,747 | ERROR | ❌ FAIL: Message: Can not connect to the Service /home/zainthehacker/.local/share/undetected_chromedriver/undetected_chromedriver
+
+2026-04-24 15:42:50,021 | INFO | 🎯 Target: @rohan__jabeel_ | Country: GLOBAL | Intensity: 3/10 | Tor: True
+2026-04-24 15:42:50,021 | INFO | 🚀 Launching 15 attacks with 5 threads
+2026-04-24 15:44:22,497 | INFO | patching driver executable /home/zainthehacker/.local/share/undetected_chromedriver/undetected_chromedriver
+2026-04-24 15:44:28,977 | INFO | patching driver executable /home/zainthehacker/.local/share/undetected_chromedriver/undetected_chromedriver
+2026-04-24 15:44:29,239 | ERROR | ❌ FAIL: [Errno 26] Text file busy: '/home/zainthehacker/.local/share/undetected_chromedriver/undetected_chromedriver'
+2026-04-24 15:44:29,884 | ERROR | ❌ FAIL: [Errno 2] No such file or directory: '/home/zainthehacker/.local/share/undetected_chromedriver/undetected/chromedriver-linux64/chromedriver' -> '/home/zainthehacker/.local/share/undetected_chromedriver/undetected_chromedriver'
+2026-04-24 15:44:32,321 | ERROR | ❌ FAIL: [Errno 2] No such file or directory: '/home/zainthehacker/.local/share/undetected_chromedriver/undetected/chromedriver-linux64/chromedriver' -> '/home/zainthehacker/.local/share/undetected_chromedriver/undetected_chromedriver'
+2026-04-24 15:44:32,770 | ERROR | ❌ FAIL: [Errno 2] No such file or directory: '/home/zainthehacker/.local/share/undetected_chromedriver/undetected/chromedriver-linux64/chromedriver' -> '/home/zainthehacker/.local/share/undetected_chromedriver/undetected_chromedriver'
+2026-04-24 15:45:08,018 | ERROR | ❌ FAIL: Message: Can not connect to the Service /home/zainthehacker/.local/share/undetected_chromedriver/undetected_chromedriver
+
+2026-04-24 15:45:11,318 | ERROR | Tor renew failed: Socket error: 0x01: General SOCKS server failure
+2026-04-24 15:48:11,059 | INFO | patching driver executable /home/zainthehacker/.local/share/undetected_chromedriver/undetected_chromedriver
+2026-04-24 15:48:19,526 | INFO | patching driver executable /home/zainthehacker/.local/share/undetected_chromedriver/undetected_chromedriver
+2026-04-24 15:48:23,646 | INFO | patching driver executable /home/zainthehacker/.local/share/undetected_chromedriver/undetected_chromedriver
+2026-04-24 15:48:23,852 | ERROR | ❌ FAIL: [Errno 26] Text file busy: '/home/zainthehacker/.local/share/undetected_chromedriver/undetected_chromedriver'
+2026-04-24 15:48:27,509 | ERROR | ❌ FAIL: [Errno 2] No such file or directory: '/home/zainthehacker/.local/share/undetected_chromedriver/undetected/chromedriver-linux64/chromedriver' -> '/home/zainthehacker/.local/share/undetected_chromedriver/undetected_chromedriver'
+2026-04-24 15:48:27,669 | ERROR | Tor renew failed: Socket error: 0x01: General SOCKS server failure
+2026-04-24 15:48:32,668 | ERROR | Tor renew failed: Socket error: 0x01: General SOCKS server failure
+2026-04-24 15:48:51,080 | INFO | patching driver executable /home/zainthehacker/.local/share/undetected_chromedriver/undetected_chromedriver
+2026-04-24 15:49:12,390 | ERROR | ❌ FAIL: Message: Can not connect to the Service /home/zainthehacker/.local/share/undetected_chromedriver/undetected_chromedriver
+
+2026-04-24 15:49:16,138 | ERROR | Tor renew failed: Socket error: 0x01: General SOCKS server failure
+2026-04-24 15:49:18,926 | ERROR | ❌ FAIL: Message: Can not connect to the Service /home/zainthehacker/.local/share/undetected_chromedriver/undetected_chromedriver
+
+2026-04-24 15:49:23,557 | ERROR | Tor renew failed: Socket error: 0x01: General SOCKS server failure
+2026-04-24 15:49:37,006 | ERROR | ❌ FAIL: Message: Can not connect to the Service /home/zainthehacker/.local/share/undetected_chromedriver/undetected_chromedriver
+
+2026-04-24 15:49:40,700 | ERROR | Tor renew failed: Socket error: 0x01: General SOCKS server failure
+2026-04-24 15:54:54,807 | INFO | 
+🛑 Kill switch activated - Cleaning up...
+2026-04-24 15:55:00,763 | ERROR | ❌ FAIL: <urlopen error retrieval incomplete: got only 8328564 out of 10017438 bytes>
+2026-04-24 15:55:00,765 | ERROR | ❌ FAIL: <urlopen error retrieval incomplete: got only 5868836 out of 10017438 bytes>
+2026-04-24 15:55:00,766 | ERROR | ❌ FAIL: <urlopen error retrieval incomplete: got only 8637428 out of 10017438 bytes>
+2026-04-24 15:55:00,766 | ERROR | ❌ FAIL: <urlopen error retrieval incomplete: got only 5133856 out of 10017438 bytes>
+2026-04-24 15:55:00,766 | ERROR | ❌ FAIL: <urlopen error retrieval incomplete: got only 5941414 out of 10017438 bytes>
+2026-04-25 06:21:26,097 | INFO | 🎯 Target: @rohan__jabeel_ | Country: GLOBAL | Intensity: 3/10 | Tor: True
+2026-04-25 06:21:26,108 | INFO | 🚀 Launching 15 attacks with 5 threads
+2026-04-25 06:28:45,505 | INFO | 
+🛑 Kill switch activated - Cleaning up...
+2026-04-25 06:35:03,454 | INFO | 
+🛑 Kill switch activated - Cleaning up...
+2026-04-25 06:41:37,426 | INFO | 🎯 Target: @rohan__jabeel_ | Country: GLOBAL | Intensity: 1/10 | Tor: True
+2026-04-25 06:41:37,427 | INFO | 🚀 Launching 5 attacks with 5 threads
+2026-04-25 06:42:24,174 | ERROR | ❌ FAIL: <urlopen error retrieval incomplete: got only 232132 out of 10017438 bytes>
+2026-04-25 06:42:24,175 | ERROR | ❌ FAIL: <urlopen error retrieval incomplete: got only 248668 out of 10017438 bytes>
+2026-04-25 06:42:24,176 | ERROR | ❌ FAIL: <urlopen error retrieval incomplete: got only 308692 out of 10017438 bytes>
+2026-04-25 06:42:24,177 | ERROR | ❌ FAIL: <urlopen error retrieval incomplete: got only 382800 out of 10017438 bytes>
+2026-04-25 06:42:24,178 | ERROR | ❌ FAIL: <urlopen error retrieval incomplete: got only 339008 out of 10017438 bytes>

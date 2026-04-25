@@ -8,17 +8,21 @@
     ],
     "IN": [
       "http://103.174.102.223:80",
-      "http://14.98.76.54:3128",
-      "http://182.72.123.45:8080"
+      "http://14.98.76.54:3128"
     ],
     "US": [
-      "http://192.227.159.127:80",
-      "http://45.67.89.12:3128"
+      "http://192.227.159.127:80"
     ]
   },
+  "tor": {
+    "enabled": true,
+    "control_port": 9051,
+    "control_password": "5121472hacker"
+  },
   "settings": {
-    "threads": 30,
-    "delay_min": 0.8,
-    "delay_max": 2.5
+    "threads": 5,
+    "delay_min": 2.0,
+    "delay_max": 5.0,
+    "max_reports_per_circuit": 10
   }
 }
